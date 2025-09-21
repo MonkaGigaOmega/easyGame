@@ -1,0 +1,31 @@
+.regButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:60px;
+    background-color:lightgray;
+    border-radius: 5px;
+    border: 2px solid black;
+    transition: 0.2s ease;
+    box-shadow: rgb(0, 0, 0) 2px 2px 10px -2px;
+}
+
+.regButton:hover{
+    background-color:rgb(238, 238, 238);
+    transform: scale(1.05);
+}
+.title{
+    font-size: 20px;
+    margin-bottom: 50px;
+    max-width:400px;
+padding:0 0 0 30px;
+line-height: 30px;
+}
+
+.Welcome{
+    display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+}

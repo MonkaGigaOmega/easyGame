@@ -1,0 +1,41 @@
+.InventoryLine {
+  display: flex;
+  gap: 6px;
+}
+.description {
+  width: 500px;
+  background-color: rgb(148, 148, 148);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button {
+  width: 200px;
+  height: 60px;
+  font-size: 22px;
+  font-family: "Minecraft Rus", sans-serif;
+  cursor: pointer;
+  display: flex;
+  color: black;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(175, 175, 175);
+  border-radius: 5px;
+  border: 2px solid black;
+  transition: 0.2s ease;
+}
+.button:hover {
+  background-color: rgb(238, 238, 238);
+}
+.buttonGood {
+  background-color: green;
+}
+.buttonGood:hover {
+  background-color: rgb(63, 181, 63);
+  transform: scale(1.01);
+}
+.InventoryLineBought div,
+.InventoryLineBought button {
+  text-decoration: line-through;
+}
