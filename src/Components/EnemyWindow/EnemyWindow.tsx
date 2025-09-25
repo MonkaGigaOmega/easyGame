@@ -12,18 +12,19 @@ export const EnemyWindow = () => {
   const [hp, setHp] = useState(9);
   const [maxHp, setMaxHp] = useState(9);
   const [size, setSize] = useState(200);
-  const [enemyId, setEnemyId] = useState(0);
+  const [enemyId, setEnemyId] = useState(getRandomNumber(0, Enemies.length - 1));
+  const lvl = useAppSelector(state => state.CKP.Lvl);
 
   const kick = () => {
     setHp(prev => {
       if (prev > Power) return prev - Power;
       else {
         dispatch(addKills(1));
-        const newHp = getRandomNumber(5, 16);
+        const newHp = lvl > 0 ? (lvl + 1) * getRandomNumber(8, 16) : getRandomNumber(8, 16);
         setMaxHp(newHp);
-        setSize(getRandomNumber(130, 350));
+        setSize(getRandomNumber(305, 400));
         setEnemyId(getRandomNumber(0, Enemies.length - 1));
-        dispatch(getCoin(getRandomNumber(0, 10)));
+        dispatch(getCoin(lvl > 0 ? (lvl + 1) * getRandomNumber(2, 10) : getRandomNumber(2, 10)));
         if (Kills % 100 === 0 && Kills !== 0) dispatch(increaseLvl(1));
         return newHp;
       }

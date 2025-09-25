@@ -8,7 +8,7 @@ export const store = configureStore({
   },
 });
 store.subscribe(() => {
-  localStorage.setItem("progress", JSON.stringify(store.getState().CKP));
+  localStorage.setItem("Gameprogress", JSON.stringify(store.getState().CKP));
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 function loadProgress() {
-  const raw = localStorage.getItem("progress");
-  if (!raw) return null; // если в LS ничего нет
+  const raw = localStorage.getItem("Gameprogress");
+  if (!raw) return null;
   try {
     return JSON.parse(raw);
   } catch {
-    return null; // если вдруг битый JSON
+    return null;
   }
 }
 
@@ -18,6 +18,7 @@ interface CKPState {
   Kills: number;
   Power: number;
   Lvl: number;
+  ShopID: number;
 }
 
 const initialState: CKPState = saved || {
@@ -25,6 +26,7 @@ const initialState: CKPState = saved || {
   Kills: 0,
   Power: 1,
   Lvl: 0,
+  ShopID: 0,
 };
 
 const CKPSlice = createSlice({
@@ -46,8 +48,11 @@ const CKPSlice = createSlice({
     increaseLvl: (state, action: PayloadAction<number>) => {
       state.Lvl += action.payload;
     },
+    increaseShopid: (state, action: PayloadAction<number>) => {
+      state.ShopID += action.payload;
+    },
   },
 });
 
-export const { getCoin, addKills, spentCoin, increasePower, increaseLvl } = CKPSlice.actions;
+export const { getCoin, addKills, spentCoin, increasePower, increaseLvl, increaseShopid } = CKPSlice.actions;
 export default CKPSlice.reducer;

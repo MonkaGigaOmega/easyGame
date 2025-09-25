@@ -8,7 +8,13 @@ interface FormLogRegProps {
 export const FormLogReg = ({ submitFunction, text, email, setEmail }: FormLogRegProps) => {
   return (
     <form onSubmit={submitFunction} className={styles.form}>
-      <input value={email} onChange={e => setEmail(e.target.value)} className={styles.input} />
+      <input
+        value={email}
+        onChange={e => {
+          if (e.target.value.length < 15) return setEmail(e.target.value);
+        }}
+        className={styles.input}
+      />
       <button className={styles.button} type="submit">
         {text}
       </button>

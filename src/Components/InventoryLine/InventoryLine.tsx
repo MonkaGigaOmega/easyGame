@@ -1,33 +1,40 @@
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { increasePower, spentCoin } from "../../store/slices/CKPSlice";
+import { increasePower, increaseShopid, spentCoin } from "../../store/slices/CKPSlice";
 import { InventorySquare } from "../InventorySquare/InventorySquare";
 import styles from "./InventoryLine.module.scss";
+
 interface InventoryLineProps {
   urlItem?: string;
   descriptionItem: number;
   priceItem: number;
+  id: number;
 }
-export const InventoryLine = ({ urlItem, descriptionItem, priceItem }: InventoryLineProps) => {
-  const [isBought, setIsBought] = useState(false);
+
+export const InventoryLine = ({ urlItem, descriptionItem, priceItem, id }: InventoryLineProps) => {
   const Coins = useAppSelector(state => state.CKP.Coins);
   const dispatch = useAppDispatch();
+  const itemId = useAppSelector(state => state.CKP.ShopID);
+  const [isBought, setIsBought] = useState(false);
   const buy = () => {
     if (Coins >= priceItem && !isBought) {
+      setIsBought(true);
       dispatch(increasePower(descriptionItem));
       dispatch(spentCoin(priceItem));
-      setIsBought(true);
+      dispatch(increaseShopid(1));
     }
   };
+
   return (
-    <div className={isBought ? `${styles.InventoryLine} ${styles.InventoryLineBought}` : `${styles.InventoryLine}`}>
+    <div className={itemId > id ? `${styles.InventoryLine} ${styles.InventoryLineBought}` : styles.InventoryLine}>
       <InventorySquare url={urlItem} />
       <div className={styles.description}>Увеличивает урон на {descriptionItem}</div>
       <button
         onClick={buy}
-        className={Coins >= priceItem && !isBought ? `${styles.button} ${styles.buttonGood}` : `${styles.button}`}
+        disabled={itemId > id || Coins < priceItem}
+        className={itemId <= id && Coins >= priceItem ? `${styles.button} ${styles.buttonGood}` : styles.button}
       >
-        {priceItem}
+        {itemId > id ? "Куплено" : priceItem}
       </button>
     </div>
   );
